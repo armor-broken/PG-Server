@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import com.example.dao.db1.HistorydataInfo1Mapper;
 import com.example.dao.db2.HistorydataInfo2Mapper;
 import com.example.model.HistorydataInfo;
 import com.example.service.HistorydataInfoService;
@@ -15,7 +16,7 @@ import java.util.List;
 public class HistorydataInfoServiceImpl implements HistorydataInfoService {
 
     @Autowired
-    private HistorydataInfo2Mapper historydataInfoMapper;
+    private HistorydataInfo1Mapper historydataInfo1Mapper;
 
 
 
@@ -24,8 +25,8 @@ public class HistorydataInfoServiceImpl implements HistorydataInfoService {
      * @return
      */
     @Override
-    public List<HistorydataInfo> findHistoryData() {
-        return historydataInfoMapper.findHistoryData();
+    public List<HistorydataInfo> findHistoryData1() {
+        return historydataInfo1Mapper.findHistoryData1();
     }
 
 

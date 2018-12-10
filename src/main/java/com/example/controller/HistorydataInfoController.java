@@ -23,7 +23,7 @@ public class HistorydataInfoController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public List<HistorydataInfo> collectionInit() {
-        return historydataInfoService.findHistoryData();
+        return historydataInfoService.findHistoryData1();
     }
 
 

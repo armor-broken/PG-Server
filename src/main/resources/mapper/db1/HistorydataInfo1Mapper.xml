@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.dao.HistorydataInfoMapper" >
+<mapper namespace="com.example.dao.db1.HistorydataInfo1Mapper" >
     <sql id="Base_Column_List" >
         <!--
           WARNING - @mbggenerated
@@ -15,7 +15,7 @@
         <result column="latitude" property="lat" jdbcType="VARCHAR" />
     </resultMap>
     <!--查询频率表-->
-    <select id="findHistoryData" resultMap="HistoryDataResultMap" useCache="true">
+    <select id="findHistoryData1" resultMap="HistoryDataResultMap" useCache="true">
         SELECT <include refid="Base_Column_List" /> FROM mt_collection where '2018-11-28 16:35:12' >= `createdate`
     </select>
 </mapper>
