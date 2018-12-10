@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.db2.CollectionInfo2Mapper" >
+    <!--新增采集信息-->
+    <insert id="insert2" parameterType="com.example.model.CollectionInfo" >
+        insert into mt_station (clcRf,clcMpath,clcLon,clcLat,clcAlt,clcLoc,clcSatNum,clcUTC,clcDev) values (#{clcRf},#{clcMpath},#{clcLon},#{clcLat},#{clcAlt},#{clcLoc},#{clcSatNum},#{clcUTC},#{clcDev})
+    </insert>
+    <!--查询频率表-->
+    <select id="selectFrequency2" resultType="java.lang.Integer">
+        SELECT stationFre FROM mt_site
+    </select>
+    <!--查询频率表-->
+    <select id="findFrequency2" resultType="java.lang.Integer">
+        SELECT frequency FROM mt_frequency WHERE task_id=#{id}
+    </select>
+    <!--新增采集信息-->
+    <insert id="insertCollection2" parameterType="com.example.model.CollectionInfo" >
+        insert into mt_collection (frequency,RF,Mpath,longitude,latitude,satellite_num,altitude,UTC,device,identify) values (#{clcFre},#{clcRf},#{clcMpath},#{clcLon},#{clcLat},#{clcSatNum},#{clcAlt},#{clcUTC},#{clcDev},#{clcIdentify})
+    </insert>
+</mapper>

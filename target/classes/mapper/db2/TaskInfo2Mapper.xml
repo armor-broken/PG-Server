@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.db2.TaskInfo2Mapper" >
+    <!-- 对这个语句开启二级缓存 -->
+    <sql id="Base_Column_List" >
+        stationId
+    </sql>
+    <resultMap id="BaseResultMap" type="com.example.model.StationInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="stationId" property="stationId" jdbcType="VARCHAR" />
+        <result column="stationConId" property="stationConId" jdbcType="INTEGER" />
+        <result column="stationName" property="stationName" jdbcType="VARCHAR" />
+        <result column="stationFre" property="stationFre" jdbcType="INTEGER" />
+        <result column="stationProgram" property="stationProgram" jdbcType="VARCHAR" />
+        <result column="stationLon" property="stationLon" jdbcType="VARCHAR" />
+        <result column="stationLat" property="stationLat" jdbcType="VARCHAR" />
+        <result column="stationAlt" property="stationAlt" jdbcType="INTEGER" />
+        <result column="stationAntHei" property="stationAntHei" jdbcType="INTEGER" />
+        <result column="stationAntForm" property="stationAntForm" jdbcType="VARCHAR" />
+        <result column="stationAntOri" property="stationAntOri" jdbcType="VARCHAR" />
+        <result column="stationPower" property="stationPower" jdbcType="VARCHAR" />
+        <result column="stationSyn" property="stationSyn" jdbcType="INTEGER" />
+    </resultMap>
+    <!--任务类型-->
+    <resultMap id="CategoriesResultMap" type="com.example.model.CategorieInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="cat" property="cat" jdbcType="VARCHAR" />
+    </resultMap>
+    <!--任务查询结果集-->
+    <resultMap id="TaskResultMap" type="com.example.model.TaskInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <id column="cat_id" property="catId" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="cat" property="cat" jdbcType="VARCHAR" />
+        <result column="createDate" property="date" />
+    </resultMap>
+    <!--频率查询结果集-->
+    <resultMap id="FrequencyResultMap" type="com.example.model.FrequencyInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <id column="task_id" property="taskId" jdbcType="BIGINT" />
+        <result column="frequency" property="taskFre" jdbcType="BIGINT" />
+        <result column="program" property="taskProgram" jdbcType="VARCHAR" />
+    </resultMap>
+    <!--台站查询结果集-->
+    <resultMap id="StationResultMap" type="com.example.model.Station" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <id column="task_id" property="taskId" jdbcType="BIGINT" />
+        <result column="stationname" property="stationName" jdbcType="VARCHAR" />
+        <result column="longitude" property="stationLon" jdbcType="INTEGER" />
+        <result column="latitude" property="stationLat" jdbcType="VARCHAR" />
+        <result column="altitude" property="stationAlt" jdbcType="INTEGER" />
+        <result column="antheight" property="stationAntHei" jdbcType="DOUBLE" />
+        <result column="antform" property="stationAntForm" jdbcType="VARCHAR" />
+        <result column="antorientation" property="stationAntOri" jdbcType="VARCHAR" />
+        <result column="power" property="stationPower" jdbcType="INTEGER" />
+        <result column="issyn" property="isSyn" jdbcType="TINYINT" />
+    </resultMap>
+
+    <!--查询任务类型-->
+    <select id="findCategorie2" resultMap="CategoriesResultMap">
+        SELECT *FROM mt_categories
+    </select>
+    <!--新增任务-->
+    <insert id="insertTask2" parameterType="com.example.model.TaskInfo" >
+        insert into mt_task (cat_id,name) values (#{catId},#{name})
+    </insert>
+    <!--删除任务-->
+    <delete id="deleteTask2" parameterType="java.lang.Integer" >
+        DELETE FROM mt_task where id=#{id}
+    </delete>
+    <!--更新任务-->
+    <update id="updateTask2" parameterType="com.example.model.TaskInfo" >
+        UPDATE mt_task SET cat_id=#{catId},name=#{name} WHERE id=#{id}
+    </update>
+    <!--查询任务列表-->
+    <select id="findTask2" resultMap="TaskResultMap">
+        SELECT *FROM mt_task t LEFT JOIN mt_categories c on t.cat_id = c.id
+    </select>
+    <!--新增频点及呼号-->
+    <insert id="insertFre2" parameterType="com.example.model.FrequencyInfo" >
+            INSERT INTO mt_frequency
+            (task_id,frequency,program)
+            VALUES
+            (#{taskId},#{taskFre},#{taskProgram})
+    </insert>
+    <!--删除频点及呼号-->
+    <delete id="deleteFre2" parameterType="java.lang.Integer" >
+        DELETE FROM mt_frequency where id=#{id}
+    </delete>
+    <!--更新频点及呼号-->
+    <update id="updateFre2" parameterType="com.example.model.FrequencyInfo" >
+        UPDATE mt_frequency SET task_id=#{taskId},frequency=#{taskFre},program=#{taskProgram} WHERE id=#{id}
+    </update>
+    <!--查询频点列表-->
+    <select id="findFre2" resultMap="FrequencyResultMap" parameterType="java.lang.Integer">
+        SELECT *FROM mt_frequency where task_id=#{taskId}
+    </select>
+    <!--新增台站-->
+    <insert id="insertStation2" parameterType="com.example.model.Station" >
+            insert into mt_station
+            (task_id,stationname,longitude,latitude,altitude,antheight,antform,antorientation,power,issyn)
+            values
+            (#{taskId},#{stationName},#{stationLon},#{stationLat},#{stationAlt},#{stationAntHei},#{stationAntForm},#{stationAntOri},#{stationPower},#{isSyn})
+    </insert>
+    <!--删除台站-->
+    <delete id="deleteStation2" parameterType="java.lang.Integer" >
+        DELETE FROM mt_station where id=#{id}
+    </delete>
+    <!--更新台站-->
+    <update id="updateStation2" parameterType="com.example.model.Station" >
+        UPDATE mt_station
+        SET
+        task_id=#{taskId},stationname=#{stationName},longitude=#{stationLon},latitude=#{stationLat},altitude=#{stationAlt},antheight=#{stationAntHei},antform=#{stationAntForm},antorientation=#{stationAntOri},power=#{stationPower},issyn=#{isSyn} WHERE id=#{id}
+    </update>
+    <!--查询台站列表-->
+    <select id="findStation2" resultMap="StationResultMap" parameterType="java.lang.Integer">
+        SELECT *FROM mt_station where task_id=#{taskId}
+    </select>
+</mapper>
