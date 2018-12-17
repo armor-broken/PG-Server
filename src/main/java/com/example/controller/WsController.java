@@ -98,8 +98,12 @@ public class WsController {
         for (int i = 0; i < idList.size(); i++) {
             int id = Integer.parseInt(idList.get(i).toString());
             templist = collectionInfoService.findFrequency1(id);
+            //去除重复的频率
             for (int j = 0; j < templist.size(); j++) {
-                fretable.add(templist.get(j));
+                //如果集合里面没有相同的元素才往里存
+                if(!fretable.contains(templist.get(j))){
+                    fretable.add(templist.get(j));
+                }
             }
         }
 //        返回频率表
