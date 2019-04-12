@@ -14,8 +14,17 @@
         <result column="longitude" property="lng" jdbcType="VARCHAR" />
         <result column="latitude" property="lat" jdbcType="VARCHAR" />
     </resultMap>
+    <resultMap id="HistoryListMap" type="com.example.model.RecordInfo" >
+        <result column="record_name" property="recordName" jdbcType="VARCHAR" />
+        <result column="starttime" property="startTime" jdbcType="VARCHAR" />
+        <result column="stoptime" property="stopTime" jdbcType="VARCHAR" />
+    </resultMap>
     <!--查询频率表-->
     <select id="findHistoryData1" resultMap="HistoryDataResultMap" useCache="true">
-        SELECT <include refid="Base_Column_List" /> FROM mt_collection where '2018-11-28 16:35:12' >= `createdate`
+        SELECT <include refid="Base_Column_List" /> FROM mt_collection where '2019-04-12 16:38:42' >= `createdate`
+    </select>
+    <!--查询历史数据表-->
+    <select id="findHistoryList1" resultMap="HistoryListMap" useCache="true">
+        SELECT *FROM mt_record
     </select>
 </mapper>

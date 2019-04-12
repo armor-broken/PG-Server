@@ -9,10 +9,11 @@ import java.util.List;
 
 /**
  * @author liuquan
+ * @description: 测试任务类型
  */
 @RestController
 @RequestMapping("/task")
-public class DropdownController {
+public class TaskCateController {
     @Autowired
     private TaskInfoService taskInfoService;
 

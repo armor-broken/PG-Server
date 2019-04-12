@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author liuquan
+ * @description: 测试台站
  */
 @RestController
 @RequestMapping("/stations")
-public class StationController {
+public class StationInfoController {
 
 
     @Autowired

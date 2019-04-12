@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class WsController {
+public class RealTimeController {
     private static Boolean flag = false;
     @Autowired
     private CollectionInfoService collectionInfoService;
@@ -111,8 +111,8 @@ public class WsController {
 //        设置前端返回IP
         device1IP = idListInfo.getDevice1IP();
         util.initComm(device1IP);
-        System.out.println(device1IP);
-        System.out.println(util.getIPPDU());
+//        System.out.println(device1IP);
+//        System.out.println(util.getIPPDU());
         if (device1IP.equals(util.getIPPDU())){
             response.setDeviceIPState("1");
         }else {

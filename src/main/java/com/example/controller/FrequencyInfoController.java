@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author liuquan
+ * @description: 测试频率
  */
 @RestController
 @RequestMapping("/frequencys")
